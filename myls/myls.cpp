@@ -1,20 +1,37 @@
-// myls.cpp : This file contains the 'main' function. Program execution begins and ends there.
-//
-
 #include <iostream>
+#include <sys/types.h>
+#include <dirent.h>
 
-int main()
+int main(int argc, char** argv)
 {
-    std::cout << "Hello World!\n";
+    struct dirent *direntp;
+    DIR *dirp;
+    // No command line arguments provided. Need the name of the current working 
+    // directory to list the files
+    if (argc == 1) {  // The only command line argument is "myls"
+  
+        return;
+    }
+
+    // The only argument is -h so we need to list all the files in the current 
+    // working directory including the hidden files
+    if (argc == 2 && argv[2] == "-h") { 
+
+        return;
+    }
+
+    // 1 or more arguments -> Use argc to loop through all of the listed
+    // directories
+    for (int i = 1; i < argc; i++) {
+        dirp = opendir(argv[i]);
+        if (dirp == NULL) {     // Error with directory
+            std::cout << "Cannot access " << argv[i] << std::endl;
+            return 0;
+        }
+
+        while (direntp = readdir(dirp)) {
+            std::cout << direntp->d_name << std::endl;
+        }
+    }
 }
 
-// Run program: Ctrl + F5 or Debug > Start Without Debugging menu
-// Debug program: F5 or Debug > Start Debugging menu
-
-// Tips for Getting Started: 
-//   1. Use the Solution Explorer window to add/manage files
-//   2. Use the Team Explorer window to connect to source control
-//   3. Use the Output window to see build output and other messages
-//   4. Use the Error List window to view errors
-//   5. Go to Project > Add New Item to create new code files, or Project > Add Existing Item to add existing code files to the project
-//   6. In the future, to open this project again, go to File > Open > Project and select the .sln file
