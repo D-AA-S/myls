@@ -15,7 +15,7 @@ int main(int argc, char** argv)
 
     // The only argument is -h so we need to list all the files in the current 
     // working directory including the hidden files
-    if (argc == 2 && argv[2] == "-h") { 
+    if (argc == 2 && argv[1] == "-h") { 
 
         return;
     }
