@@ -1,6 +1,7 @@
 #include <iostream>
 #include <sys/types.h>
 #include <dirent.h>
+#include <string>
 
 int main(int argc, char** argv)
 {
@@ -30,8 +31,19 @@ int main(int argc, char** argv)
             return 0;
         }
 
-        while (direntp = readdir(dirp)) {
-            std::cout << direntp->d_name << std::endl;
+        if (argv[1] == "-h") {  // If the first argument is "-h", then we can print every file in the directory
+            while (direntp = readdir(dirp))   // Loop through the files in the directory
+                std::cout << direntp->d_name << std::endl;
+            closedir(dirp);     // Close the directory
+        }
+
+        else {
+            while (direntp = readdir(dirp)) {   // Loop through the files in the directory
+                std::string filename = direntp->d_name;
+                if (filename[0] != '.')         // If the file does not start with "."
+                    std::cout << filename << std::endl;
+            }
+            closedir(dirp);     // Close the directory
         }
     }
 }
