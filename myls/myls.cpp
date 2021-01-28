@@ -26,6 +26,7 @@ int main(int argc, char** argv)
         dirp = opendir(argv[i]);
         if (dirp == NULL) {     // Error with directory
             std::cout << "Cannot access " << argv[i] << std::endl;
+            closedir(dirp);
             return 0;
         }
 
