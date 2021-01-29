@@ -15,12 +15,15 @@ int printDirectories(std::string argument, bool hiddenfile)
         closedir(dirp);
         return 0;
     }
+    argument = (argument == ".") ? "Current Directory" : argument;
     if (hiddenfile == true) {  // If the first argument is "-h", then we can print every file in the directory
+        std::cout << argument << std::endl;
         while (direntp = readdir(dirp))   // Loop through the files in the directory
             std::cout << direntp->d_name << std::endl;
         closedir(dirp);     // Close the directory
     }
     else {
+        std::cout << argument << std::endl;
         while (direntp = readdir(dirp)) {   // Loop through the files in the directory
             std::string filename = direntp->d_name;
             if (filename[0] != '.')         // If the file does not start with "."
