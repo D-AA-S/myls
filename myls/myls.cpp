@@ -35,6 +35,7 @@ int main(int argc, char** argv)
 {
     bool hidenfil = false;
     int i = 1;
+    std::string hiddenCheck;
     // No command line arguments provided. Need the name of the current working 
     // directory to list the files
     if (argc == 1) {  // The only command line argument is "myls"
@@ -42,16 +43,18 @@ int main(int argc, char** argv)
         return 0;
     }
 
+    hiddenCheck = argv[1];
+
     // The only argument is -h so we need to list all the files in the current 
     // working directory including the hidden files
-    if (argc == 2 && argv[1] == "-h") { 
+    if (argc == 2 && hiddenCheck.compare("-h") == 0) {
         printDirectories(".", true);
         return 0;
     }
 
     // 1 or more arguments -> Use argc to loop through all of the listed
     // directories
-    if (argc > 2 && argv[1] == "-h") { hidenfil = true; i = 2; }
+    if (argc > 2 && hiddenCheck.compare("-h") == 0) { hidenfil = true; i = 2; }
     while (i < argc) 
     {
         printDirectories(argv[i],hidenfil);
