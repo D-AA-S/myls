@@ -3,6 +3,13 @@
 #include <dirent.h>
 #include <string>
 
+
+
+//accepts directories and a hidden file boolean to scan through a directory
+//If a directory isn't accessable/doesn't exsist the function outputs that it cannot access it and returns
+//If the directory is accessable then the passed in directory's contents are outputed onto the screen, 
+//anything beginning with a . character will not be read unless the hiddenfile's value is true
+
 int printDirectories(std::string argument, bool hiddenfile) 
 {
     struct dirent* direntp;
@@ -33,7 +40,8 @@ int printDirectories(std::string argument, bool hiddenfile)
     }
 }
 
-
+//Handles the command line argument, giving special cases when nothing is inputted
+//when only -h is inputted, and for when there are multiple inputted directories
 int main(int argc, char** argv)
 {
     bool hidenfil = false;
