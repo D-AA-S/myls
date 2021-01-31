@@ -27,11 +27,10 @@ int printDirectories(std::string argument, bool hiddenfile) {
             std::cout << direntp->d_name << std::endl;
         closedir(dirp);     // Close the directory
     }
-
     else {
         while (direntp = readdir(dirp)) {   // Loop through the files in the directory
             std::string filename = direntp->d_name;
-            if (filename[0] != '.')         // If the file does not start with "."
+            if (filename[0] != '.')         // If the file does not start with "." it will not be printed
                 std::cout << filename << std::endl;
         }
         closedir(dirp);     // Close the directory
@@ -48,7 +47,7 @@ int main(int argc, char** argv) {
 
     // No command line arguments provided. Need the name of the current working 
     // directory to list the files
-    if (argc == 1) {  // The only command line argument is "myls"
+    if (argc == 1) {
         dirName = get_current_dir_name();       // Get the current working directory name to pass into the function
         printDirectories(dirName, false);
         return 0;
