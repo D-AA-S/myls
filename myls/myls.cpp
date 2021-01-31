@@ -4,6 +4,9 @@
 #include <unistd.h>
 #include <string>
 
+//
+// Daniel A. Silva 820567716
+
 // Accepts directories and a hidden file boolean to scan through a directory
 // If a directory isn't accessible/doesn't exist the function outputs that it cannot access it and returns
 // If the directory is accessible then the passed in directory's contents are outputed onto the screen, 
